@@ -1,13 +1,18 @@
-const { task, usePlugin } = require("@nomiclabs/buidler/config");
-const { getWallets } = require("ethereum-waffle");
+import { task, usePlugin } from "@nomiclabs/buidler/config";
+import { getWallets } from "ethereum-waffle";
+import { Wallet } from "ethers";
 
 usePlugin("@nomiclabs/buidler-ethers");
 
-function showInformation(label, format, accounts) {
+function showInformation(
+  label: String,
+  format: (wallet: Wallet) => string,
+  accounts: Wallet[]
+) {
   const formattedAccounts = accounts.map(format);
 
   console.log(`${label}:\n`);
-  for (item of formattedAccounts) {
+  for (const item of formattedAccounts) {
     console.log(item);
   }
   console.log("\n--------------------------------\n");
